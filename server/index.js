@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
-const start = async () => {
+const start = async () => { // подключения к базе данных 
     try {
         await sequelize.authenticate() // подключения к базе данных 
         await sequelize.sync() // сверяет состояние базы данных со схемой данных 
