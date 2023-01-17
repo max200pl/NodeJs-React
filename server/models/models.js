@@ -2,10 +2,10 @@ const sequelize = require('../db')
 const { DataTypes } = require('sequelize')
 
 const User = sequelize.define('user', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    email: { type: DataTypes.STRING, unique: true, },
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }, // числовое поле, первичный ключ, будет авто инкрементироваться 
+    email: { type: DataTypes.STRING, unique: true, }, // тип стринг, уникальное поле 
     password: { type: DataTypes.STRING },
-    role: { type: DataTypes.STRING, defaultValue: "USER" },
+    role: { type: DataTypes.STRING, defaultValue: "USER" }, //тип стринг по умолчанию Юзер или админ 
 })
 
 const Basket = sequelize.define('basket', {
@@ -21,7 +21,7 @@ const Device = sequelize.define('device', {
     name: { type: DataTypes.STRING, unique: true, allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
     rating: { type: DataTypes.INTEGER, defaultValue: 0 },
-    img: { type: DataTypes.STRING, allowNull: false },
+    img: { type: DataTypes.STRING, allowNull: false }, // allowNull не может быть пустым 
 })
 
 const Type = sequelize.define('type', {
@@ -50,10 +50,10 @@ const TypeBrand = sequelize.define('type_brand', {
 })
 
 
-User.hasOne(Basket)
-Basket.belongsTo(User)
+User.hasOne(Basket) // связь один к одному  
+Basket.belongsTo(User) // корзина принадлежит пользователю 
 
-User.hasMany(Rating)
+User.hasMany(Rating) //  один пользователь может иметь несколько оценок  (одна запись в базе данных содержит много записей с характеристиками)
 Rating.belongsTo(User)
 
 Basket.hasMany(BasketDevice)
@@ -74,7 +74,10 @@ BasketDevice.belongsTo(Device)
 Device.hasMany(DeviceInfo, { as: 'info' });
 DeviceInfo.belongsTo(Device)
 
-Type.belongsToMany(Brand, { through: TypeBrand })
+// связь много ко многим 
+// (при связи много ко многим создается прамежсуточная таблица - 
+// в которой хранится какой бренд принадлежит какому типу и кокой тип связан каким типом)
+Type.belongsToMany(Brand, { through: TypeBrand }) // вторым аргументом нужно создать связующую таблицу (модель TypeBrand)
 Brand.belongsToMany(Type, { through: TypeBrand })
 
 module.exports = {
