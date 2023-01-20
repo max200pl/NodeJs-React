@@ -4,7 +4,7 @@ class DeviceController {
 
     async getAll(req, res) { } // получение всех типов 
 
-    async getOne(req, res) { } // получения одного девайса 
+    async getOne(req, res) { } // получение одного девайса по id 
 }
 
 module.exports = new DeviceController()

@@ -10,4 +10,4 @@ class UserController {
     }
 }
 
-module.exports = new UserController()
+module.exports = new UserController() // создаем новый объект созданный с этого класса 
