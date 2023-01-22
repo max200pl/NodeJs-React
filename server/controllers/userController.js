@@ -8,7 +8,7 @@ class UserController {
     async check(req, res, next) {  // авторизован пользователь или нет 
         const { id } = req.query // получаем параметры строки запроса  http://localhost:5001/api/user/auth?id=5&message=adsdadas
         if (!id) {
-            return next(ApiError.brandRequest('Не задан ID')) //* вызываем функцию next!
+            return next(ApiError.badRequest('Не задан ID')) //* вызываем функцию next!
         }
 
         res.json(id)

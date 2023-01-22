@@ -7,7 +7,7 @@ class ApiError extends Error {
     }
 
     //* статичные методы дают возможность к ним обращаться без создания класса 
-    static brandRequest(message) {
+    static badRequest(message) {
         return new ApiError(404, message)
     }
     static internal(message) {
