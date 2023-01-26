@@ -6,12 +6,12 @@ class BrandController {
         const { name } = req.body // тело запроса в post методе 
         const brand = await Brand.create({ name })
         return res.json(brand)
-    } // создание типа 
+    }
 
     async getAll(req, res) {
-        const brands = await Brand.findAll()
+        const brands = await Brand.findAll() // любые запросы к базе данных являются асинхронными 
         return res.json(brands)
-    } // получение всех типов 
+    }
 }
 
 module.exports = new BrandController()
