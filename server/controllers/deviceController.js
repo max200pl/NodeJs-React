@@ -62,7 +62,17 @@ class DeviceController {
         return res.json(devices) // возвращаем массив из этих девайсов
     }
 
-    async getOne(req, res) { } // получение одного девайса по id 
+    async getOne(req, res) { // получение одного девайса по id 
+        const { id } = req.params
+        const device = await Device.findOne(
+            {
+                where: { id },
+                include: [{ model: DeviceInfo, as: 'info' }] // нужно получить массив характеристик когда открываем страницу с одним девайсом 
+            }
+        )
+
+        return res.json(device)
+    }
 }
 
 module.exports = new DeviceController()
